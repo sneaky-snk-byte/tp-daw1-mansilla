@@ -1,10 +1,10 @@
-package ar.edu.undec.integrador.Biblioteca.Controller;
+package ar.edu.undec.integrador.biblioteca.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ar.edu.undec.integrador.Biblioteca.Model.Socio;
-import ar.edu.undec.integrador.Biblioteca.Service.SocioService;
+import ar.edu.undec.integrador.biblioteca.model.Socio;
+import ar.edu.undec.integrador.biblioteca.service.SocioService;
 
 import java.util.List;
 

@@ -1,11 +1,11 @@
-package ar.edu.undec.integrador.Biblioteca.Service;
+package ar.edu.undec.integrador.biblioteca.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import ar.edu.undec.integrador.Biblioteca.Model.Libro;
-import ar.edu.undec.integrador.Biblioteca.Repository.LibroRepository;
+import ar.edu.undec.integrador.biblioteca.model.Libro;
+import ar.edu.undec.integrador.biblioteca.repository.LibroRepository;
 
 @Service
 public class LibroService {

@@ -1,12 +1,11 @@
-package ar.edu.undec.integrador.Biblioteca.Service;
-
-import ar.edu.undec.integrador.Biblioteca.Repository.PrestamoRepository;
+package ar.edu.undec.integrador.biblioteca.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import ar.edu.undec.integrador.Biblioteca.Model.Prestamo;
+import ar.edu.undec.integrador.biblioteca.model.Prestamo;
+import ar.edu.undec.integrador.biblioteca.repository.PrestamoRepository;
 
 @Service
 public class PrestamoService {

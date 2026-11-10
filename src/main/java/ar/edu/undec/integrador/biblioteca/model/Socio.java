@@ -1,4 +1,4 @@
-package ar.edu.undec.integrador.Biblioteca.Model;
+package ar.edu.undec.integrador.biblioteca.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

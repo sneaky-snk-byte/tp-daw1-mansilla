@@ -1,11 +1,11 @@
-package ar.edu.undec.integrador.Biblioteca.Service;
+package ar.edu.undec.integrador.biblioteca.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import ar.edu.undec.integrador.Biblioteca.Model.Socio;
-import ar.edu.undec.integrador.Biblioteca.Repository.SocioRepository;
+import ar.edu.undec.integrador.biblioteca.model.Socio;
+import ar.edu.undec.integrador.biblioteca.repository.SocioRepository;
 
 @Service
 public class SocioService {
