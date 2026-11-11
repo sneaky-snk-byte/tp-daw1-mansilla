@@ -7,5 +7,6 @@ import ar.edu.undec.integrador.biblioteca.model.Libro;
 
 @Repository 
 public interface LibroRepository extends JpaRepository<Libro, Long>{
+    boolean existsByIsbn(String isbn);
 
 }

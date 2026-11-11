@@ -2,6 +2,7 @@ package ar.edu.undec.integrador.biblioteca.service;
 
 import java.util.List;
 
+
 import org.springframework.stereotype.Service;
 
 import ar.edu.undec.integrador.biblioteca.model.Libro;
@@ -26,6 +27,9 @@ public class LibroService {
     }
 
     public Libro crear(Libro libro){
+        if (libroRepository.existsByIsbn(libro.getIsbn())){
+            throw new RuntimeException("Ya Existe un libro con ese ISBN");
+        }
         return libroRepository.save(libro);
     }
 

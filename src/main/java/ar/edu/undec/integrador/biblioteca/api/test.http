@@ -1,2 +1,5 @@
-get http://localhost:8090/api/libros
+get http://localhost:8090/api/prestamos
+
+
+
 

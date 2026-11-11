@@ -43,10 +43,11 @@ public class Prestamo{
     
 
 
-    public Prestamo(Libro libro, Socio socio, LocalDate fechaDevolucion) {
+    public Prestamo(Libro libro, Socio socio, LocalDate fechaDevolucion, String estado) {
         this.libro = libro;
         this.socio = socio;
         this.fechaDevolucion = fechaDevolucion;
+        this.estado = "ACTIVO";
     }
 
 
