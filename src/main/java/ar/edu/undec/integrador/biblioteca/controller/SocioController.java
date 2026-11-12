@@ -5,7 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import ar.edu.undec.integrador.biblioteca.model.Prestamo;
 import ar.edu.undec.integrador.biblioteca.model.Socio;
+import ar.edu.undec.integrador.biblioteca.service.PrestamoService;
 import ar.edu.undec.integrador.biblioteca.service.SocioService;
 import jakarta.validation.Valid;
 
@@ -28,10 +30,12 @@ public class SocioController {
 
     private final SocioRepository socioRepository;
     private final SocioService socioService;
-
-    public SocioController(SocioService socioService, SocioRepository socioRepository){
+    private final PrestamoService prestamoService;
+    
+    public SocioController(SocioService socioService, SocioRepository socioRepository, PrestamoService prestamoService){
         this.socioService = socioService;
         this.socioRepository = socioRepository;
+        this.prestamoService = prestamoService;
     
     }
     @GetMapping
@@ -71,8 +75,10 @@ public class SocioController {
         socioService.eliminar(id);
         return ResponseEntity.noContent().build();
     }
-    
-    
+    @GetMapping("/{id}/prestamos")
+    public ResponseEntity<List<Prestamo>> prestamosDeSocio(@PathVariable Long id) {
+        return ResponseEntity.ok(prestamoService.buscarPorSocio(id));
+    }
     
     
 }

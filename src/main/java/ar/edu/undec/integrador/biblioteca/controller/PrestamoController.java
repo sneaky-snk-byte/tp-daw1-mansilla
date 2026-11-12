@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -32,8 +33,8 @@ public class PrestamoController {
 
     }
     @GetMapping
-    public List<Prestamo> listaTodos(){
-        return prestamoService.listarTodos();
+    public List<Prestamo> listaTodos(@RequestParam(required = false) String estado){
+        return prestamoService.listarTodos(estado);
     }
 
     @GetMapping("/{id}")
