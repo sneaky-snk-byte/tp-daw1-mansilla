@@ -1,16 +1,21 @@
 package ar.edu.undec.integrador.biblioteca.controller;
 
+import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import ar.edu.undec.integrador.biblioteca.model.Prestamo;
 import ar.edu.undec.integrador.biblioteca.service.PrestamoService;
+import jakarta.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,9 +42,22 @@ public class PrestamoController {
     }
 
     @PostMapping
-    public ResponseEntity<Prestamo> crear(@RequestBody Prestamo prestamo) {
+    public ResponseEntity<Prestamo> crear(@Valid @RequestBody Prestamo prestamo) {
         Prestamo nuevo = prestamoService.crear(prestamo);
-        return ResponseEntity.status(201).body(nuevo);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(nuevo.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).body(nuevo);
+    }
+
+    @PatchMapping("/{id}/estado")
+    public ResponseEntity<Prestamo> cambiarEstado(@PathVariable Long id, @RequestBody Map<String, String> body){
+        String nuevoEstado = body.get("estado");
+        return ResponseEntity.ok(prestamoService.cambiarEstado(id, nuevoEstado));
     }
 
     @DeleteMapping("/{id}")

@@ -33,6 +33,14 @@ public class SocioService {
         return socioRepository.save(socio);
 
     }
+
+    public Socio actualizar(Long id, Socio datos){
+        Socio socio = buscarPorId(id);
+        socio.setNombre(datos.getNombre());
+        socio.setEmail(datos.getEmail());
+        return socioRepository.save(socio);
+    }
+    
     public void eliminar(Long id){
         socioRepository.deleteById(id);
     }

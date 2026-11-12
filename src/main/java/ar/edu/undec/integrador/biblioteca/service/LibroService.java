@@ -33,6 +33,14 @@ public class LibroService {
         return libroRepository.save(libro);
     }
 
+    public Libro actualizar(Long id, Libro datos){
+        Libro libro = buscarPorId(id);
+        libro.setTitulo(datos.getTitulo());
+        libro.setAutor(datos.getAutor());
+        libro.setIsbn(datos.getIsbn());
+        return libroRepository.save(libro);
+    }
+
     public void eliminar(Long id){
         libroRepository.deleteById(id);
     }

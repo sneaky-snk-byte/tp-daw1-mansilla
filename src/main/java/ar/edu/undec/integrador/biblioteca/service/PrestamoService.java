@@ -57,6 +57,12 @@ public class PrestamoService {
         return prestamoRepository.save(prestamo);
     }
 
+    public Prestamo cambiarEstado(Long id, String nuevoEstado){
+        Prestamo prestamo = buscarPorId(id);
+        prestamo.setEstado(nuevoEstado);
+        return prestamoRepository.save(prestamo);
+    }
+
     public void eliminar(Long id){
         prestamoRepository.deleteById(id);
     }
