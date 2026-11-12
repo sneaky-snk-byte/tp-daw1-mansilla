@@ -7,5 +7,5 @@ import ar.edu.undec.integrador.biblioteca.model.Socio;
 
 @Repository
 public interface SocioRepository  extends JpaRepository<Socio, Long>{
-        
+        boolean existsByEmail(String email);
 }

@@ -27,6 +27,9 @@ public class SocioService {
     }
 
     public Socio crear(Socio socio){
+        if (socioRepository.existsByEmail(socio.getEmail())){
+            throw new RuntimeException("ese socio ya esta registrado");
+        }
         return socioRepository.save(socio);
 
     }

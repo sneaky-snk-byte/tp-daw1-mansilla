@@ -1,5 +1,6 @@
 package ar.edu.undec.integrador.biblioteca.controller;
 
+import ar.edu.undec.integrador.biblioteca.repository.SocioRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,10 +21,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("/api/socios")
 public class SocioController {
 
+    private final SocioRepository socioRepository;
     private final SocioService socioService;
 
-    public SocioController(SocioService socioService){
+    public SocioController(SocioService socioService, SocioRepository socioRepository){
         this.socioService = socioService;
+        this.socioRepository = socioRepository;
     
     }
     @GetMapping
