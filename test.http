@@ -1,0 +1,105 @@
+### Variables de entorno
+@url = http://localhost:8090/api
+
+### ==========================================
+### LIBROS
+### ==========================================
+
+### 1. Listar todos los libros
+GET {{url}}/libros
+
+### 2. Buscar libro por ID
+GET {{url}}/libros/1
+
+### 3. Crear un libro
+POST {{url}}/libros
+Content-Type: application/json
+
+{
+    "titulo": "Fahrenheit 451",
+    "autor": "Ray Bradbury",
+    "isbn": "978-0006546061"
+}
+
+### 4. Actualizar un libro
+PUT {{url}}/libros/1
+Content-Type: application/json
+
+{
+    "titulo": "Fahrenheit 451 (Edición Especial)",
+    "autor": "Ray Bradbury",
+    "isbn": "978-0006546061"
+}
+
+### 5. Eliminar un libro
+DELETE {{url}}/libros/1
+
+
+### ==========================================
+### SOCIOS
+### ==========================================
+
+### 6. Listar todos los socios
+GET {{url}}/socios
+
+### 7. Buscar socio por ID
+GET {{url}}/socios/1
+
+### 8. Crear un socio
+POST {{url}}/socios
+Content-Type: application/json
+
+{
+    "nombre": "Marcelino Mansilla",
+    "email": "marcelino@mail.com"
+}
+
+### 9. Actualizar un socio
+PUT {{url}}/socios/1
+Content-Type: application/json
+
+{
+    "nombre": "Marcelino Mansilla",
+    "email": "marcelino.nuevo@mail.com"
+}
+
+### 10. Eliminar un socio
+DELETE {{url}}/socios/1
+
+### 11. Ver los préstamos de un socio
+GET {{url}}/socios/1/prestamos
+
+
+### ==========================================
+### PRÉSTAMOS
+### ==========================================
+
+### 12. Listar todos los préstamos
+GET {{url}}/prestamos
+
+### 13. Listar préstamos filtrando por estado
+GET {{url}}/prestamos?estado=DEVUELTO
+
+### 14. Buscar préstamo por ID
+GET {{url}}/prestamos/1
+
+### 15. Crear un préstamo (Atención a los IDs directos)
+POST {{url}}/prestamos
+Content-Type: application/json
+
+{
+    "libroId": 1,
+    "socioId": 1,
+    "fechaDevolucion": "2026-12-31"
+}
+
+### 16. Cambiar estado de un préstamo (PATCH)
+PATCH {{url}}/prestamos/1/estado
+Content-Type: application/json
+
+{
+    "estado": "DEVUELTO"
+}
+
+### 17. Eliminar un préstamo
+DELETE {{url}}/prestamos/1

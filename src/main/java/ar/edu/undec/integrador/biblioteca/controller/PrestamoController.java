@@ -12,6 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ar.edu.undec.integrador.biblioteca.model.Prestamo;
 import ar.edu.undec.integrador.biblioteca.service.PrestamoService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.FutureOrPresent;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -44,6 +45,7 @@ public class PrestamoController {
     public static class PrestamoRequest {
         public Long libroId;
         public Long socioId;
+        @FutureOrPresent(message = "La fecha no puede ser en el pasado")
         public java.time.LocalDate fechaDevolucion;
     
         
