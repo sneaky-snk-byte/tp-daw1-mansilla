@@ -41,9 +41,27 @@ public class PrestamoController {
     public ResponseEntity<Prestamo> buscarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(prestamoService.buscarPorId(id));
     }
-
+    public static class PrestamoRequest {
+        public Long libroId;
+        public Long socioId;
+        public java.time.LocalDate fechaDevolucion;
+    
+        
+    }
     @PostMapping
-    public ResponseEntity<Prestamo> crear(@Valid @RequestBody Prestamo prestamo) {
+    public ResponseEntity<Prestamo> crear(@Valid @RequestBody PrestamoRequest request) {
+        Prestamo prestamo = new Prestamo();
+        
+        ar.edu.undec.integrador.biblioteca.model.Libro libro = new ar.edu.undec.integrador.biblioteca.model.Libro();
+        libro.setId(request.libroId);
+        prestamo.setLibro(libro);
+        
+        ar.edu.undec.integrador.biblioteca.model.Socio socio = new ar.edu.undec.integrador.biblioteca.model.Socio();
+        socio.setId(request.socioId);
+        prestamo.setSocio(socio);
+        
+        prestamo.setFechaDevolucion(request.fechaDevolucion);
+
         Prestamo nuevo = prestamoService.crear(prestamo);
 
         URI location = ServletUriComponentsBuilder
@@ -51,11 +69,10 @@ public class PrestamoController {
                 .path("/{id}")
                 .buildAndExpand(nuevo.getId())
                 .toUri();
-
         return ResponseEntity.created(location).body(nuevo);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/{id}/estado")
     public ResponseEntity<Prestamo> cambiarEstado(@PathVariable Long id, @RequestBody Map<String, String> body) {
         if (body == null || !body.containsKey("estado") || body.get("estado") == null) {
         throw new IllegalArgumentException("Falta el campo estado");

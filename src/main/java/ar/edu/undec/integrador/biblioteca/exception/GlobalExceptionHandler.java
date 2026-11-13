@@ -34,21 +34,22 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
     public ProblemDetail handleRuntimeException(RuntimeException ex) {
-    String mensaje = ex.getMessage() != null ? ex.getMessage().toLowerCase() : "";
+        String mensaje = ex.getMessage() != null ? ex.getMessage().toLowerCase() : "";
 
-    if (mensaje.contains("no encontrado") || mensaje.contains("inexistente") || mensaje.contains("no existe")) {
-        return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
+        if (mensaje.contains("no encontrado") || mensaje.contains("inexistente") || mensaje.contains("no existe")) {
+            return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
+        }
+
+        if (mensaje.contains("ya existe") || mensaje.contains("registrado") || 
+            mensaje.contains("prestado") || mensaje.contains("prestamo activo") || 
+            mensaje.contains("3 prestamos") || mensaje.contains("3 préstamos") ||
+            mensaje.contains("vencido") || mensaje.contains("devuelto") || 
+            mensaje.contains("transición") || mensaje.contains("final")) {
+            return ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, ex.getMessage());
+        }
+
+        return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "Error interno: " + ex.getMessage());
     }
-
-    if (mensaje.contains("prestado") || mensaje.contains("prestamo activo") || 
-        mensaje.contains("3 prestamos") || mensaje.contains("3 préstamos") ||
-        mensaje.contains("vencido") || mensaje.contains("devuelto") || 
-        mensaje.contains("transición") || mensaje.contains("final")) {
-        return ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, ex.getMessage());
-    }
-
-    return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "Error de validación o datos: " + ex.getMessage());
-}
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ProblemDetail handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
