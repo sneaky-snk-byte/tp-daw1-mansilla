@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.FutureOrPresent;
 
 @Entity
 public class Prestamo {
@@ -24,6 +25,7 @@ public class Prestamo {
     @JoinColumn(name = "socio_id")
     private Socio socio;
 
+    @FutureOrPresent(message = "La fecha no puede ser en el pasado")
     private LocalDate fechaDevolucion;
 
     private String estado = "ACTIVO";

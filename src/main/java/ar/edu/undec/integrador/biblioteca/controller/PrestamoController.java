@@ -55,8 +55,11 @@ public class PrestamoController {
         return ResponseEntity.created(location).body(nuevo);
     }
 
-    @PatchMapping("/{id}/estado")
+    @PatchMapping("/{id}")
     public ResponseEntity<Prestamo> cambiarEstado(@PathVariable Long id, @RequestBody Map<String, String> body) {
+        if (body == null || !body.containsKey("estado") || body.get("estado") == null) {
+        throw new IllegalArgumentException("Falta el campo estado");
+    }
         String nuevoEstado = body.get("estado");
         return ResponseEntity.ok(prestamoService.cambiarEstado(id, nuevoEstado));
     }
