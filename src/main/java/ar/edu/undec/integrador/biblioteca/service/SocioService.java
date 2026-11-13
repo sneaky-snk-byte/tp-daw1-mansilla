@@ -11,37 +11,37 @@ import ar.edu.undec.integrador.biblioteca.repository.SocioRepository;
 public class SocioService {
     private final SocioRepository socioRepository;
 
-    public SocioService(SocioRepository socioRepository){
+    public SocioService(SocioRepository socioRepository) {
         this.socioRepository = socioRepository;
 
     }
 
-    public List<Socio> listarTodos(){
+    public List<Socio> listarTodos() {
         return socioRepository.findAll();
 
     }
-    
-    public Socio buscarPorId(Long id){
+
+    public Socio buscarPorId(Long id) {
         return socioRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("socio no encontrado."));
+                .orElseThrow(() -> new RuntimeException("socio no encontrado."));
     }
 
-    public Socio crear(Socio socio){
-        if (socioRepository.existsByEmail(socio.getEmail())){
+    public Socio crear(Socio socio) {
+        if (socioRepository.existsByEmail(socio.getEmail())) {
             throw new RuntimeException("ese socio ya esta registrado");
         }
         return socioRepository.save(socio);
 
     }
 
-    public Socio actualizar(Long id, Socio datos){
+    public Socio actualizar(Long id, Socio datos) {
         Socio socio = buscarPorId(id);
         socio.setNombre(datos.getNombre());
         socio.setEmail(datos.getEmail());
         return socioRepository.save(socio);
     }
-    
-    public void eliminar(Long id){
+
+    public void eliminar(Long id) {
         socioRepository.deleteById(id);
     }
 }

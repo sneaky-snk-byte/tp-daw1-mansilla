@@ -21,19 +21,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
 @RestController
 @RequestMapping("/api/prestamos")
 public class PrestamoController {
 
     private final PrestamoService prestamoService;
 
-    public PrestamoController(PrestamoService prestamoService){
+    public PrestamoController(PrestamoService prestamoService) {
         this.prestamoService = prestamoService;
 
     }
+
     @GetMapping
-    public List<Prestamo> listaTodos(@RequestParam(required = false) String estado){
+    public List<Prestamo> listaTodos(@RequestParam(required = false) String estado) {
         return prestamoService.listarTodos(estado);
     }
 
@@ -56,7 +56,7 @@ public class PrestamoController {
     }
 
     @PatchMapping("/{id}/estado")
-    public ResponseEntity<Prestamo> cambiarEstado(@PathVariable Long id, @RequestBody Map<String, String> body){
+    public ResponseEntity<Prestamo> cambiarEstado(@PathVariable Long id, @RequestBody Map<String, String> body) {
         String nuevoEstado = body.get("estado");
         return ResponseEntity.ok(prestamoService.cambiarEstado(id, nuevoEstado));
     }
@@ -67,7 +67,4 @@ public class PrestamoController {
         return ResponseEntity.noContent().build();
     }
 
-    
-
-    
 }

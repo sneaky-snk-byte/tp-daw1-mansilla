@@ -7,23 +7,23 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 
-@Entity 
+@Entity
 public class Libro {
 
-    @Id 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
+    private Long id;
 
     @Column(unique = true)
     @NotBlank
-    private  String titulo;
-    
+    private String titulo;
+
     @NotBlank
-    private  String autor;
-    
+    private String autor;
+
     @Column(unique = true)
-    @NotBlank   
-    private  String isbn;
+    @NotBlank
+    private String isbn;
 
     public Libro() {
     }
@@ -34,48 +34,36 @@ public class Libro {
         this.isbn = isbn;
     }
 
-
     public String getTitulo() {
         return titulo;
     }
-
 
     public String getAutor() {
         return autor;
     }
 
-
     public String getIsbn() {
         return isbn;
     }
-
 
     public long getId() {
         return id;
     }
 
-
     public void setId(Long id) {
         this.id = id;
     }
-
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
 
-
     public void setAutor(String autor) {
         this.autor = autor;
     }
 
-
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
-
-    
-    
-    
 
 }
