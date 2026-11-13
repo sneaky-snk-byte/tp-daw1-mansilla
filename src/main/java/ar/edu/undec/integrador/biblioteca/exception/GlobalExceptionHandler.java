@@ -32,27 +32,25 @@ public class GlobalExceptionHandler {
         return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "El formato del JSON es inválido o faltan datos estructurales");
     }
 
+    @ExceptionHandler(RuntimeException.class)
+public ProblemDetail handleRuntimeException(RuntimeException ex) {
+    String mensaje = ex.getMessage() != null ? ex.getMessage().toLowerCase() : "";
+
+    if (mensaje.contains("no encontrado") || mensaje.contains("inexistente") || mensaje.contains("no existe")) {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
+    }
+
+    if (mensaje.contains("fecha") || mensaje.contains("estado")) {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
+
+    return ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, ex.getMessage());
+}
+
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ProblemDetail handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "El parámetro en la URL debe ser un número");
-    }
-
-    @ExceptionHandler(RuntimeException.class)
-    public ProblemDetail handleRuntimeException(RuntimeException ex) {
-        String mensaje = ex.getMessage() != null ? ex.getMessage().toLowerCase() : "";
-
-        if (mensaje.contains("no encontrado") || mensaje.contains("inexistente")) {
-            return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
-        }
-
-        if (mensaje.contains("ya existe") || mensaje.contains("prestado") || 
-            mensaje.contains("3 prestamos") || mensaje.contains("3 préstamos") ||
-            mensaje.contains("vencido") || mensaje.contains("devuelto")) {
-            return ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, ex.getMessage());
-        }
-
-        return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
-    }
+    }    
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ProblemDetail handleIllegalArgumentException(IllegalArgumentException ex) {

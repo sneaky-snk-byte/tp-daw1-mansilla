@@ -14,15 +14,14 @@ public class Libro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
-    @NotBlank
+    @NotBlank(message = "El titulo es obligatorio")
     private String titulo;
 
-    @NotBlank
+    @NotBlank(message = "El autor es obligatorio")
     private String autor;
 
     @Column(unique = true)
-    @NotBlank
+    @NotBlank(message = "El isbn es obligatorio")
     private String isbn;
 
     public Libro() {
